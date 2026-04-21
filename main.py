@@ -29,34 +29,32 @@ cookies = {
 
 response = requests.get(PROFILE_URL, headers=headers, cookies=cookies)
 
-print("URL objetivo:", PROFILE_URL)
-print("Código de estado:", response.status_code)
-print("Tipo de contenido:", response.headers.get("Content-Type"))
-
 html = response.text
-soup = BeautifulSoup(html, "lxml")
 
-scripts = soup.find_all("script")
+print("Código de estado:", response.status_code)
+print("Longitud total del HTML:", len(html))
 
-print("\n=== INSPECCIÓN DE SCRIPTS ===")
-print("Cantidad de scripts encontrados:", len(scripts))
+palabras = [
+    "username",
+    "profile_pic_url",
+    "graphql"
+]
 
-html_lower = html.lower()
+for palabra in palabras:
+    print(f"\n=== BUSCANDO: {palabra} ===")
+    posicion = html.find(palabra)
 
-print("\n=== BÚSQUEDA DE PALABRAS CLAVE EN EL HTML ===")
-print("Contiene 'graphql':", "graphql" in html_lower)
-print("Contiene 'username':", "username" in html_lower)
-print("Contiene '/p/':", "/p/" in html)
-print("Contiene 'profile_pic_url':", "profile_pic_url" in html)
-print("Contiene 'edge_owner_to_timeline_media':", "edge_owner_to_timeline_media" in html)
+    if posicion == -1:
+        print("No encontrada")
+    else:
+        inicio = max(0, posicion - 300)
+        fin = min(len(html), posicion + 800)
 
-print("\n=== PRIMEROS 3 SCRIPTS CON TEXTO ===")
-contador = 0
-for script in scripts:
-    contenido = script.get_text(strip=True)
-    if contenido:
-        contador += 1
-        print(f"\n--- SCRIPT {contador} ---")
-        print(contenido[:800])
-        if contador == 3:
-            break
+        print("Posición:", posicion)
+        print("Contexto encontrado:\n")
+        print(html[inicio:fin])
+
+with open("instagram_html_debug.txt", "w", encoding="utf-8") as archivo:
+    archivo.write(html)
+
+print("\nSe guardó el HTML completo en: instagram_html_debug.txt")
