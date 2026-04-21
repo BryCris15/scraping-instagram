@@ -28,33 +28,59 @@ cookies = {
 }
 
 response = requests.get(PROFILE_URL, headers=headers, cookies=cookies)
-
 html = response.text
 
 print("Código de estado:", response.status_code)
 print("Longitud total del HTML:", len(html))
 
-palabras = [
-    "username",
-    "profile_pic_url",
-    "graphql"
-]
 
-for palabra in palabras:
-    print(f"\n=== BUSCANDO: {palabra} ===")
-    posicion = html.find(palabra)
-
-    if posicion == -1:
-        print("No encontrada")
+def extraer_campo(texto, patron, nombre_campo):
+    coincidencia = re.search(patron, texto)
+    if coincidencia:
+        valor = coincidencia.group(1)
+        valor = valor.replace("\\/", "/")
+        valor = valor.replace('\\"', '"')
+        print(f"{nombre_campo}: {valor}")
+        return valor
     else:
-        inicio = max(0, posicion - 300)
-        fin = min(len(html), posicion + 800)
+        print(f"{nombre_campo}: No encontrado")
+        return None
 
-        print("Posición:", posicion)
-        print("Contexto encontrado:\n")
-        print(html[inicio:fin])
 
-with open("instagram_html_debug.txt", "w", encoding="utf-8") as archivo:
-    archivo.write(html)
+print("\n=== DATOS DEL PERFIL ===")
 
-print("\nSe guardó el HTML completo en: instagram_html_debug.txt")
+username = extraer_campo(
+    html,
+    r'"username":"(.*?)"',
+    "username"
+)
+
+full_name = extraer_campo(
+    html,
+    r'"full_name":"(.*?)"',
+    "full_name"
+)
+
+biography = extraer_campo(
+    html,
+    r'"biography":"(.*?)"',
+    "biography"
+)
+
+is_private = extraer_campo(
+    html,
+    r'"is_private":(true|false)',
+    "is_private"
+)
+
+is_verified = extraer_campo(
+    html,
+    r'"is_verified":(true|false)',
+    "is_verified"
+)
+
+profile_pic_url = extraer_campo(
+    html,
+    r'"profile_pic_url":"(.*?)"',
+    "profile_pic_url"
+)
