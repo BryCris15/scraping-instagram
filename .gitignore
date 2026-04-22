@@ -1,0 +1,12 @@
+# Credenciales y sesión — nunca subir al repo
+.env
+cookies.json
+
+# Resultados generados
+resultado.json
+respuesta.json
+
+# Entorno virtual Python
+venv/
+__pycache__/
+*.pyc
