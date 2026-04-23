@@ -10,3 +10,6 @@ respuesta.json
 venv/
 __pycache__/
 *.pyc
+
+# Archivos de texto con información sensible
+.txt
