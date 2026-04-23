@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Instagram - andreaortegar_</title>
+    <style>
+        :root {
+            --bg: #f4efe6;
+            --panel: rgba(255, 251, 245, 0.82);
+            --panel-strong: #fffaf2;
+            --text: #1f1a17;
+            --muted: #6b625c;
+            --accent: #c84c2a;
+            --accent-soft: #f1c7a8;
+            --line: rgba(31, 26, 23, 0.1);
+            --shadow: 0 20px 45px rgba(80, 46, 24, 0.14);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: "Space Grotesk", "Segoe UI", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(200, 76, 42, 0.14), transparent 28%),
+                radial-gradient(circle at top right, rgba(111, 148, 112, 0.18), transparent 22%),
+                linear-gradient(180deg, #f8f2e8 0%, var(--bg) 55%, #efe6da 100%);
+            min-height: 100vh;
+        }
+
+        .shell {
+            width: min(1180px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 32px 0 48px;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 24px;
+            align-items: center;
+            background: var(--panel);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            border-radius: 28px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+        }
+
+        .avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 28px;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 14px 24px rgba(0, 0, 0, 0.12);
+            background: #e8ddd0;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: clamp(2rem, 4vw, 3.6rem);
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+        }
+
+        .username {
+            margin-top: 8px;
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .bio {
+            margin-top: 16px;
+            color: var(--muted);
+            line-height: 1.7;
+            max-width: 68ch;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 28px;
+        }
+
+        .stat {
+            background: var(--panel-strong);
+            border-radius: 22px;
+            padding: 18px;
+            border: 1px solid var(--line);
+        }
+
+        .stat-label {
+            display: block;
+            color: var(--muted);
+            font-size: 0.84rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .stat-value {
+            display: block;
+            margin-top: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .section-title {
+            margin: 34px 0 18px;
+            font-size: 1.3rem;
+            letter-spacing: -0.03em;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .post-card {
+            overflow: hidden;
+            background: var(--panel);
+            border-radius: 26px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+        }
+
+        .post-image-link {
+            display: block;
+            aspect-ratio: 4 / 5;
+            background: #e9dfd4;
+        }
+
+        .post-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .post-body {
+            padding: 18px;
+        }
+
+        .post-meta, .post-stats {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            color: var(--muted);
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+
+        .post-meta a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .post-description {
+            margin: 14px 0 16px;
+            line-height: 1.65;
+            color: var(--text);
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 5;
+            overflow: hidden;
+        }
+
+        @media (max-width: 760px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .avatar {
+                margin: 0 auto;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="shell">
+        <section class="hero">
+            <img class="avatar" src="https://instagram.fuio6-3.fna.fbcdn.net/v/t51.2885-19/371197916_831580078607902_228450016012649401_n.jpg?efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&amp;_nc_ht=instagram.fuio6-3.fna.fbcdn.net&amp;_nc_cat=110&amp;_nc_oc=Q6cZ2gH9VPLsRboM9UZYJS7hYVeuAp3NQwUSMjv8XGa9SEAqQqrYYz7hsuYKydNvsg_AQJs&amp;_nc_ohc=ural_vzm4PcQ7kNvwEdZ9Ax&amp;_nc_gid=hXC9Pru92j5dqqc_b8A2hw&amp;edm=AEF8tYYBAAAA&amp;ccb=7-5&amp;oh=00_Af0JOpAgUePan-OWz3gTHmKbxTQvCzQShkbXIz2GlExC4Q&amp;oe=69EF2012&amp;_nc_sid=1e20d2" alt="Foto de perfil de andreaortegar_">
+            <div>
+                <h1>Andrea Ortega R.</h1>
+                <div class="username">@andreaortegar_</div>
+                <p class="bio">📍| Ecuador-UIO<br>🎓| Odontóloga <br>🦋| remaining unfazed</p>
+                <div class="stats">
+                    <div class="stat"><span class="stat-label">Seguidores</span><span class="stat-value">1.076</span></div>
+                    <div class="stat"><span class="stat-label">Siguiendo</span><span class="stat-value">724</span></div>
+                    <div class="stat"><span class="stat-label">Posts</span><span class="stat-value">14</span></div>
+                    <div class="stat"><span class="stat-label">Tipo</span><span class="stat-value">Cuenta</span></div>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="section-title">Ultimas fotografias</h2>
+        <section class="posts-grid">
+            <article class="post-card">
+                            <a class="post-image-link" href="https://www.instagram.com/p/C1TGISksfa7/" target="_blank" rel="noopener noreferrer">
+                                <img class="post-image" src="https://instagram.fuio6-3.fna.fbcdn.net/v/t39.30808-6/472388990_18478701394055078_7050358132738454497_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=101&amp;ig_cache_key=MzI2NTk4MTExMjc1MTYxNzcyMw%3D%3D.3-ccb7-5&amp;ccb=7-5&amp;_nc_sid=58cdad&amp;efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTQzNS5zZHIuQzMifQ%3D%3D&amp;_nc_ohc=E2AQUZ540jwQ7kNvwEndQpv&amp;_nc_oc=AdoUb6TkoCNnQW5z6jx8RD2zVzsXhX6OwYw65ZVx-Ekrgyqe5eI7Zng9-5mMEzYvBtQ&amp;_nc_ad=z-m&amp;_nc_cid=1731&amp;_nc_zt=23&amp;_nc_ht=instagram.fuio6-3.fna&amp;_nc_gid=1Xpucd-B88iaKIsZ3Mfapw&amp;_nc_ss=7a22e&amp;oh=00_Af3DhwYOaBW7QUuCW-GySWRm4qOE85Jnx-LnlQs-jFkTyw&amp;oe=69EEFC27" alt="Publicacion de andreaortegar_" loading="lazy">
+                            </a>
+                            <div class="post-body">
+                                <div class="post-meta">
+                                    <span>2023-12-25 20:48:29</span>
+                                    <a href="https://www.instagram.com/p/C1TGISksfa7/" target="_blank" rel="noopener noreferrer">Ver post</a>
+                                </div>
+                                <p class="post-description">Santa’s favorites 🎅🏻❤️. ¡Feliz Navidad para todos! 🌲✨</p>
+                                <div class="post-stats">
+                                    <span>Likes: 82</span>
+                                    <span>Comentarios: 4</span>
+                                </div>
+                            </div>
+                        </article><article class="post-card">
+                            <a class="post-image-link" href="https://www.instagram.com/p/1EyBAZENtu/" target="_blank" rel="noopener noreferrer">
+                                <img class="post-image" src="https://instagram.fuio6-3.fna.fbcdn.net/v/t51.82787-15/619907650_18553504615055078_2313866917689653598_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=109&amp;ig_cache_key=OTU2MTA4OTkyMzc0OTU0ODYy.3-ccb7-5&amp;ccb=7-5&amp;_nc_sid=58cdad&amp;efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjY0MHg2NDAuc2RyLkMzIn0%3D&amp;_nc_ohc=N1nSL2pz2jEQ7kNvwHLHied&amp;_nc_oc=Adow5i0yBJz_-q-RRCqv3PsQ9PkhKKMW85rX8U5qmVCu_bYG3fTqOs4VsfViNb0AEDg&amp;_nc_ad=z-m&amp;_nc_cid=1731&amp;_nc_zt=23&amp;_nc_ht=instagram.fuio6-3.fna&amp;_nc_gid=skb0aPkWmWlkj598iw00aw&amp;_nc_ss=7a22e&amp;oh=00_Af1bApBG_M6lzg4S7iW_u16wWB3gY9pouN2Wnj_sZomlVQ&amp;oe=69EEFD42" alt="Publicacion de andreaortegar_" loading="lazy">
+                            </a>
+                            <div class="post-body">
+                                <div class="post-meta">
+                                    <span>2015-04-04 20:24:55</span>
+                                    <a href="https://www.instagram.com/p/1EyBAZENtu/" target="_blank" rel="noopener noreferrer">Ver post</a>
+                                </div>
+                                <p class="post-description">Mi todo en éste mundo👴😻💘</p>
+                                <div class="post-stats">
+                                    <span>Likes: 41</span>
+                                    <span>Comentarios: 0</span>
+                                </div>
+                            </div>
+                        </article>
+        </section>
+    </main>
+</body>
+</html>
